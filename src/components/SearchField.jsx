@@ -76,12 +76,11 @@ class SearchField extends React.Component {
     this.onBlurBound = this.onBlurBound.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.searchText !== nextProps.searchText) {
-      this.setState({
-        value: nextProps.searchText,
-      });
+  static getDerivedStateFromProps(nextProps, prevState){
+    if (nextProps.searchText !== prevState.value) {
+        return { value: nextProps.searchText };
     }
+    else return null; // Triggers no change in the state
   }
 
   onChangeBound(event) {
